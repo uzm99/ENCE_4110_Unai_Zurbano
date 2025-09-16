@@ -238,7 +238,7 @@ Using the implementation of previous parts, the sixth display is included in the
 
 *Figure 6.3 — Main block Implementation*
 
-<img src="IMG/Part_V_main.png" width="300">
+<img src="IMG/Part_VI_main.png" width="300">
 
 
 ### Demonstration
@@ -256,5 +256,23 @@ Implement and test a 3-to-1 3-bits multiplexer module with a 7 segments decoder 
 
 
 ### Logic / Design
-A 3-to-1 3-bits multiplexer module handles a 7-segment decoder to display the word in six of the 7-segment displays. The 3-bit selector is subtituded with an automated module with a 0 to 6 counter.
+A 3-to-1 3-bits multiplexer module handles a 7-segment decoder to display the word in six of the 7-segment displays. Instead of a manual 3-bit selector, an automated counter (0–6) cycles through the displays, shifting the letters in sequence.
 
+
+### Implementation
+Building on the previous parts, a counter is connected to the 3-to-1 multiplexer. The counter runs on the clock signal, divided down to count in seconds. Every half second (with a 25 MHz base clock), the signal **`up`** toggles, and when it goes high, the counter increments.  
+With the input signal **`d = 6`**, the counter rolls over at 6, and its output **`q`** drives the multiplexer, determining which display is active. A reset signal (**`rst`**) is assigned to a switch, allowing the scrolling to restart from the initial position.
+
+*Figure 7.1 — Conter with clock signal Implementation*
+
+<img src="IMG/Part_VII_counter.png" width="300">
+
+*Figure 7.2 — Main block Implementation*
+
+<img src="IMG/Part_VII_main.png" width="300">
+
+### Demonstration
+
+*Figure 7.3 — Counter and 3-to-1 3-bits multiplexer to 7-segment decoder Demonstration*
+
+<img src="IMG/Part_VII_Demonstration.gif" width="500">
