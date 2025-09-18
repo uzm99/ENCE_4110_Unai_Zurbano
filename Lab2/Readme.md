@@ -33,7 +33,7 @@ A module is created as a 7 segment decoder to display the digits 0 to 9. With a 
 
 Figure 1.1 — 7-segment decoder Design
 
-<img src="IMG/Part_I_7seg_dec_Design.gif" width="300">
+<img src="IMG/Part_I_7seg_dec_Design.gif" width="600">
 
 To define the logic, a Look Up Table (LUT) is needed. The 7 segment displays are NOT active in high, whenever are required to be off, will be set to 1.
 
@@ -63,7 +63,7 @@ Figure 1.2 — 7-segment LUT
 
 *Figure 1.3 — 7-segment decoder Implementation*
 
-<img src="IMG/Part_I_seg7_dec_logic.png" width="300">
+<img src="IMG/Part_I_seg7_dec_logic.png" width="800">
 
 *Figure 1.4 — Main block Implementation*
 
@@ -85,7 +85,93 @@ Display the values from the switches in binary. The circuit will display digits 
 
 
 ### Logic / Design
-Using the module 7-segment decoder of the previous part a comparison needs to be made to extract a carry-out. 
+Using the module 7-segment decoder of the previous part a comparison needs to be made to extract an auxiliary signal to activate the second display for the values highers that 9. 
+
+Figure 2.1 — Comparison module LUT
+
+| Input (i_v[3..0]) | Output (o_z) |
+|-------------------|--------------|
+| 0000              | 0            |
+| 0001              | 0            |
+| 0010              | 0            |
+| 0011              | 0            |
+| 0100              | 0            |
+| 0101              | 0            |
+| 0110              | 0            |
+| 0111              | 0            |
+| 1000              | 0            |
+| 1001              | 0            |
+| 1010              | 1            |
+| 1011              | 1            |
+| 1100              | 1            |
+| 1101              | 1            |
+| 1110              | 1            |
+| 1111              | 1            |
+
+In paralel of the comparison, a first block named 'Circuit A' converts the binary number signal to extract the first figit of the number. The logic would be than when the number is 10, the first diplay would show the first digit beeng 0. And consequently, 11-->1, 12-->2, etc.
+
+Figure 2.2 — Circuit A module LUT
+
+| Input (i_v[3..0]) | Output (o_a[3..0]) |
+|-------------------|--------------------|
+| 0000              | 0000               |
+| 0001              | 0001               |
+| 0010              | 0010               |
+| 0011              | 0011               |
+| 0100              | 0100               |
+| 0101              | 0101               |
+| 0110              | 0110               |
+| 0111              | 0111               |
+| 1000              | 1000               |
+| 1001              | 1001               |
+| 1010              | 0000               |
+| 1011              | 0001               |
+| 1100              | 0010               |
+| 1101              | 0011               |
+| 1110              | 0100               |
+| 1111              | 0101               |
+
+With the output signal of the comparison block, another moduled named 'Circuit B' will determine when to display the second digit of the input, in this cas a '1'.
+
+Figure 2.3 — Circuit B module LUT
+
+| Input (i_z) | Output (o_seg[7..0]) |
+|-------------|----------------------|
+| 0           | 11111111             |
+| 0           | 11111001             |
+
+Using four 2-to-1 1bit multiplexeres (from previous Lab) the signal will be toggled to display correctly the first digit of the signal using the 7-segment display module from previous parts.
+
+*Figure 2.4 — Main block Implementation*
+
+<img src="IMG/Part_II_bin2dec_Design.gif" width="800">
 
 
+### Implementation
 
+*Figure 2.5 — Circuit A module Implementation*
+
+<img src="IMG/Part_II_circA.png" width="500">
+
+*Figure 2.6 — Circuit B module Implementation*
+
+<img src="IMG/Part_II_circB.png" width="300">
+
+*Figure 2.7 — Comparison module Implementation*
+
+<img src="IMG/Part_II_comp.png" width="500">
+
+*Figure 2.8 — Binary to decimal module Implementation*
+
+<img src="IMG/Part_II_b2d.png" width="500">
+
+*Figure 2.9 — Main module Implementation*
+
+<img src="IMG/Part_II_main.png" width="500">
+
+
+### Demonstration
+
+*Figure 2.10 — Binary to decimal Demonstration*
+
+<img src="IMG/Part_II_Demonstration.gif" width="500">
