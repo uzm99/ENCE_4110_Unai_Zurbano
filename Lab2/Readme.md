@@ -22,7 +22,7 @@ The goal is to designing combinational circuits that can perform binary-to-decim
 
 
 <!-- Sections -->
-<h2 id="Part I">Part I — Display 4-bit value from switches</h2>  
+<h2 id="Part I">Part I — Display 4-bit values from switches [0..9]</h2>  
 
 ### Objective
 Display the value from the switches in binary. The circuit will display digits for 0 to 9 and the valuations form 1010 to 1111's as don't cares.
@@ -78,7 +78,7 @@ Figure 1.2 — 7-segment LUT
 
 
 
-<h2 id="Part II">Part II — Display 4-bit values from switches</h2>  
+<h2 id="Part II">Part II — Display 4-bit values from switches [0..15]</h2>  
 
 ### Objective
 Display the values from the switches in binary. The circuit will display digits for 0 to 15 using a convination of two 7-segments display.
