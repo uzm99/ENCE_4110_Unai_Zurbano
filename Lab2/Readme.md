@@ -1,1 +1,91 @@
+![FPGA](https://img.shields.io/badge/FPGA-DE10--Lite-blue)
+![Language](https://img.shields.io/badge/Language-Verilog-green)
+![Simulator](https://img.shields.io/badge/Tool-Logisim-orange)
+# Lab 2 — Numbers and Displays (FPGA DE10-Lite)
+
+This repository documents the second FPGA lab using the DE10-Lite (MAX 10 10M50DAF484C7G).  
+The goal is to designing combinational circuits that can perform binary-to-decimal number conversion and binary-coded-decimal (BCD) addition.
+
+<!-- Table of content -->
+<nav>
+  <h1>Table of Contents</h2>
+  <ul>
+    <li><a href="#Part I">Part I</a></li>
+    <li><a href="#Part II">Part II</a></li>
+    <li><a href="#Part III">Part III</a></li>
+    <li><a href="#Part IV">Part IV</a></li>
+    <li><a href="#Part V">Part V</a></li>
+    <li><a href="#Part VI">Part VI</a></li>
+    <li><a href="#Part VII">(extra) Part VII</a></li>
+  </ul>
+</nav>
+
+
+<!-- Sections -->
+<h2 id="Part I">Part I — Display 4-bit value from switches</h2>  
+
+### Objective
+Display the value from the switches in binary. The circuit will display digits for 0 to 9 and the valuations form 1010 to 1111's as don't cares.
+
+
+### Logic / Design
+A module is created as a 7 segment decoder to display the digits 0 to 9. With a 4-bit input the digits displayed correspond to the input in binary.
+
+Figure 1.1 — 7-segment decoder Design
+
+<img src="IMG/Part_I_7seg_dec_Design.gif" width="300">
+
+To define the logic, a Look Up Table (LUT) is needed. The 7 segment displays are NOT active in high, whenever are required to be off, will be set to 1.
+
+Figure 1.2 — 7-segment LUT
+
+| Input (i_m[3..0]) | Output (o_seg[7..0]) | Note |
+|-------------------|----------------------|------|
+| 0000              | 11000000             | 0    |
+| 0001              | 11111001             | 1    |
+| 0010              | 10100100             | 2    |
+| 0011              | 10110000             | 3    |
+| 0100              | 10011001             | 4    |
+| 0101              | 10010010             | 5    |
+| 0110              | 10000010             | 6    |
+| 0111              | 11111000             | 7    |
+| 1000              | 10000000             | 8    |
+| 1001              | 10010000             | 9    |
+| 1010              | 1-------             | -    |
+| 1011              | 1-------             | -    |
+| 1100              | 1-------             | -    |
+| 1101              | 1-------             | -    |
+| 1110              | 1-------             | -    |
+| 1111              | 1-------             | -    |
+
+
+### Implementation
+
+*Figure 1.3 — 7-segment decoder Implementation*
+
+<img src="IMG/Part_I_seg7_dec_logic.png" width="300">
+
+*Figure 1.4 — Main block Implementation*
+
+<img src="IMG/Part_I_main_logic.png" width="300">
+
+
+### Demonstration
+
+*Figure 1.5 — 7-segment decoder Demonstration*
+
+<img src="IMG/Part_I_Demonstration.gif" width="500">
+
+
+
+<h2 id="Part II">Part II — Display 4-bit values from switches</h2>  
+
+### Objective
+Display the values from the switches in binary. The circuit will display digits for 0 to 15 using a convination of two 7-segments display.
+
+
+### Logic / Design
+Using the module 7-segment decoder of the previous part a comparison needs to be made to extract a carry-out. 
+
+
 
