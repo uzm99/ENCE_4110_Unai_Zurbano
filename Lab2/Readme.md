@@ -175,3 +175,62 @@ Using four 2-to-1 1bit multiplexeres (from previous Lab) the signal will be togg
 *Figure 2.10 — Binary to decimal Demonstration*
 
 <img src="IMG/Part_II_Demonstration.gif" width="500">
+
+
+
+<h2 id="Part III">Part III — Full adder and 4-bit Ripple-carry adder</h2>  
+
+### Objective
+Add two binary numbers and a carry-in, and display the result in the LEDs.
+
+
+### Logic / Design
+A full adder module needs to be created, adding two bits and a carry in. It will output two bits, the carry out and the  that will be displayed in the LEDs at first.
+
+Figure 3.1 — FA module LUT
+
+| Input (i_a, i_b, i_c) | Output (o_c, o_s) |
+|-----------------------|-------------------|
+| 0       0       0     | 0       0         |
+| 0       0       1     | 0       1         |
+| 0       1       0     | 0       1         |
+| 0       1       1     | 1       0         |
+| 1       0       0     | 0       1         |
+| 1       0       1     | 1       0         |
+| 1       1       0     | 1       0         |
+| 1       1       1     | 1       1         |
+
+With four of this FA module a 4-bit ripple-carry will be made connecting the carry out of each module to the carry-in of the next one. The uotput will be four bits plus the carry-out.
+
+*Figure 3.2 — 4-bit adder (ripple-carry) Design*
+
+<img src="IMG/Part_III_4-bit_Ripple-carry_Design.gif" width="500">
+
+
+### Implementation
+
+*Figure 3.3 — FA module Implementation*
+
+<img src="IMG/Part_III_FA.png" width="500">
+
+*Figure 3.4 — 4-bit adder (ripple-carry) module Implementation*
+
+<img src="IMG/Part_III_4bit_adder.png" width="300">
+
+*Figure 3.5 — Main module Implementation*
+
+<img src="IMG/Part_III_main.png" width="500">
+
+
+### Demonstration
+
+*Figure 3.6 — FA Demonstration*
+
+<img src="IMG/Part_III_FA_Demonstration.gif" width="500">
+
+*Figure 3.7 — 4-bit adder (ripple-carry) Demonstration*
+
+<img src="IMG/Part_III_4bit_adder_Demonstration.gif" width="500">
+
+
+
