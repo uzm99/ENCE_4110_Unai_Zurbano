@@ -299,7 +299,7 @@ For the check binary functionality, a new module is created to verify if the inp
 
 *Figure 4.5 — Binary to decimal module Implementation*
 
-<img src="IMG/Part_IV_din2dec.png" width="300">
+<img src="IMG/Part_IV_b2d.png" width="300">
 
 *Figure 4.6 — Main module Implementation*
 
