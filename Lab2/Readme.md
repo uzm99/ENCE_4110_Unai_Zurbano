@@ -237,7 +237,7 @@ With four of this FA module a 4-bit ripple-carry will be made connecting the car
 <h2 id="Part IV">Part IV — 8-bit Ripple-carry adder</h2>  
 
 ### Objective
-Add two decimal numbers (8 bits each) and a carry-in, and display numbers and the result in the LEDs.
+Add two decimal numbers (8 bits each) and a carry-in, and display numbers and the result in the 7-segment displays.
 
 
 ### Logic / Design
@@ -317,3 +317,32 @@ And a descriptive picture of how the main module is designed.
 *Figure 4.7 — 8-bit adder (ripple-carry) Demonstration*
 
 <img src="IMG/Part_IV_Demonstration.gif" width="500">
+
+
+
+<h2 id="Part V">Part V — Two BCD numbers adder</h2>  
+
+### Objective
+Add two BDC numbers (8 bits each) and display numbers and the result in the 7-segments dsiplays.
+
+
+### Logic / Design
+The 4-bit Adder logic from previous parts can be used. In this case, with only 10 switches in the DE10-Lite FPGA avaliable to use it as inputs, one of the BDC number will be constant. One first adder will add the firts digit of the BCD numbers and another the second one. The carry-out signal of the first one will be connected to the carry-in input of the second one. And again, the 'CheckBCD' module will indicate if the input number is higher than 99.
+
+*Figure 5.1 — BCD adder module Design*
+
+<img src="IMG/Part_V_BCDAdder_Design.gif" width="500">
+
+
+### Implementation
+
+*Figure 5.2 — Main module Implementation*
+
+<img src="IMG/Part_V_main.png" width="500">
+
+
+### Demonstration
+
+*Figure 5.3 — BCD adder Demonstration*
+
+<img src="IMG/Part_V_Demonstration.gif" width="500">
