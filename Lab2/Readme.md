@@ -286,6 +286,12 @@ For the check binary functionality, a new module is created to verify if the inp
 
 <img src="IMG/Part_IV_bin2dec_Design.gif" width="800">
 
+And a descriptive picture of how the main module is designed.
+
+*Figure 4.2 — Binary to decimal module Design*
+
+<img src="IMG/Part_IV_main_design.png" width="500">
+
 
 ### Implementation
 
