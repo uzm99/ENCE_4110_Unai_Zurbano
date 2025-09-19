@@ -142,7 +142,7 @@ Figure 2.3 — Circuit B module LUT
 
 Using four 2-to-1 1bit multiplexeres (from previous Lab) the signal will be toggled to display correctly the first digit of the signal using the 7-segment display module from previous parts.
 
-*Figure 2.4 — Main block Implementation*
+*Figure 2.4 — Binary to decimal module Design*
 
 <img src="IMG/Part_II_bin2dec_Design.gif" width="800">
 
@@ -234,3 +234,80 @@ With four of this FA module a 4-bit ripple-carry will be made connecting the car
 
 
 
+<h2 id="Part IV">Part IV — 8-bit Ripple-carry adder</h2>  
+
+### Objective
+Add two decimal numbers (8 bits each) and a carry-in, and display numbers and the result in the LEDs.
+
+
+### Logic / Design
+The logic from previous parts can be used but adapted. A third 'circuit C' module is created into the previous binary to decimal module to contemplate the numbers highers than 15 when a carry-in is active. Coverting them into the first digit for the display. For example 16 to 6 up to 19. In essence, adding 6.
+
+Figure 4.1 — Circuit C module LUT
+
+|Input (i_a, i_cin) | Output (o_a) |
+|-------------------|--------------|
+| 0000      0       |   0000       |   
+| 0000      1       |   0110       |   
+| 0001      0       |   0001       |   
+| 0001      1       |   0111       |   
+| 0010      0       |   0010       |
+| 0010      1       |   1000       |
+| 0011      0       |   0011       |
+| 0011      1       |   1001       |
+| 0100      0       |   0100       |
+| 0100      1       |   0110       |
+| 0101      0       |   0101       |
+| 0101      1       |   0111       |
+| 0110      0       |   0110       |
+| 0110      1       |   1100       |
+| 0111      0       |   0111       |
+| 0111      1       |   1101       |
+| 1000      0       |   1000       |
+| 1000      1       |   1110       |
+| 1001      0       |   1001       |
+| 1001      1       |   1111       |
+| 1010      0       |   1010       |
+| 1010      1       |   1000       |
+| 1011      0       |   1011       |
+| 1011      1       |   1001       |
+| 1100      0       |   1100       |
+| 1100      1       |   1110       |
+| 1101      0       |   1101       |
+| 1101      1       |   1111       |
+| 1110      0       |   1110       |
+| 1110      1       |   1100       |
+| 1111      0       |   1111       |
+| 1111      1       |   1101       |   
+
+For the check binary functionality, a new module is created to verify if the input values are higher than 9, using the module 'comparison' from previous parts. And inlcuding OR gates to implement the carry-in bit into the multiplexers, the module to convert binary to decimal now includes up to 19.
+
+*Figure 4.2 — Binary to decimal module Design*
+
+<img src="IMG/Part_IV_bin2dec_Design.gif" width="800">
+
+
+### Implementation
+
+*Figure 4.3 — Circuit C module Implementation*
+
+<img src="IMG/Part_IV_circC.png" width="500">
+
+*Figure 4.4 — Check BCD module Implementation*
+
+<img src="IMG/Part_IV_checkBCd.png" width="300">
+
+*Figure 4.5 — Binary to decimal module Implementation*
+
+<img src="IMG/Part_IV_din2dec.png" width="300">
+
+*Figure 4.6 — Main module Implementation*
+
+<img src="IMG/Part_IV_main.png" width="500">
+
+
+### Demonstration
+
+*Figure 4.7 — 8-bit adder (ripple-carry) Demonstration*
+
+<img src="IMG/Part_IV_Demonstration.gif" width="500">
