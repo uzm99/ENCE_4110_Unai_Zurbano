@@ -320,10 +320,10 @@ And a descriptive picture of how the main module is designed.
 
 
 
-<h2 id="Part V">Part V — Two BCD numbers adder</h2>  
+<h2 id="Part V">Part V — Two digit BCD numbers adder</h2>  
 
 ### Objective
-Add two BDC numbers (8 bits each) and display numbers and the result in the 7-segments dsiplays.
+Add two digit BDC numbers (8 bits each) and display numbers and the result in the 7-segments dsiplays.
 
 
 ### Logic / Design
@@ -343,6 +343,43 @@ The 4-bit Adder logic from previous parts can be used. In this case, with only 1
 
 ### Demonstration
 
-*Figure 5.3 — BCD adder Demonstration*
+*Figure 5.3 — Two digit BCD adder Demonstration*
 
 <img src="IMG/Part_V_Demonstration.gif" width="500">
+
+
+
+<h2 id="Part VI">Part VI — Two digit BCD numbers adder with logic approach</h2>  
+
+### Objective
+Add two digit BDC numbers (8 bits each) and display numbers and the result in the 7-segments dsiplays using logic statements.
+
+
+### Logic / Design
+Instead of using the modules from previous parts, a statements logic approach will be used. 
+
+*Figure 6.1 — Statements logic*
+
+<img src="IMG/Part_VI_StatementLogic.png" width="300">
+
+Using the logic from the excercice, a new set of reg variables are declared to operate them. When adding the digits form the BCD numbers independently, a comparison needs to be made to determin if the value is haigher than 9. If true, the first digit will result of an addiional 6 to be accurate. And the carry out will be added to the second digit operation. Then the operation results will be displayed in the 7-segment displays. And again, the 'CheckBCD' module will indicate if the input number is higher than 99.
+
+With the RTL Viewer, it can be stablished that the logic from this part matches the one from previous parts, consecuently the functionality will remain the same.
+
+*Figure 6.2 — RTL Viewer*
+
+<img src="IMG/Part_VI_RTLViewer.png" width="500">
+
+
+### Implementation
+
+*Figure 6.3 — Main module Implementation*
+
+<img src="IMG/Part_VI_main.png" width="500">
+
+
+### Demonstration
+
+*Figure 6.4 — Two digit BCD adder with logic approach Demonstration*
+
+<img src="IMG/Part_VI_Demonstration.gif" width="500">
