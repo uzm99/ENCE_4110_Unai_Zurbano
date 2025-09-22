@@ -4,7 +4,7 @@
 # Lab 2 — Numbers and Displays (FPGA DE10-Lite)
 
 This repository documents the second FPGA lab using the DE10-Lite (MAX 10 10M50DAF484C7G).  
-The goal is to designing combinational circuits that can perform binary-to-decimal number conversion and binary-coded-decimal (BCD) addition.
+The goal is to design combinational circuits that can perform binary-to-decimal number conversion and binary-coded-decimal (BCD) addition.
 
 <!-- Table of content -->
 <nav>
@@ -25,7 +25,7 @@ The goal is to designing combinational circuits that can perform binary-to-decim
 <h2 id="Part I">Part I — Display 4-bit values from switches [0..9]</h2>  
 
 ### Objective
-Display the value from the switches in binary. The circuit will display digits for 0 to 9 and the valuations form 1010 to 1111's as don't cares.
+Display the value from the switches in binary from 0–9. Inputs from 1010 to 1111 are treated as ‘don’t care’ conditions.
 
 
 ### Logic / Design
@@ -35,7 +35,7 @@ Figure 1.1 — 7-segment decoder Design
 
 <img src="IMG/Part_I_7seg_dec_Design.gif" width="600">
 
-To define the logic, a Look Up Table (LUT) is needed. The 7 segment displays are NOT active in high, whenever are required to be off, will be set to 1.
+To define the logic, a Look Up Table (LUT) is needed. The 7-segment display is active low: segments turn on with 0 and off with 1.
 
 Figure 1.2 — 7-segment LUT
 
@@ -81,7 +81,7 @@ Figure 1.2 — 7-segment LUT
 <h2 id="Part II">Part II — Display 4-bit values from switches [0..15]</h2>  
 
 ### Objective
-Display the values from the switches in binary. The circuit will display digits for 0 to 15 using a convination of two 7-segments display.
+Display values from the switches (0–15). The circuit uses a combination of two 7-segment displays to show two-digit numbers.
 
 
 ### Logic / Design
@@ -108,7 +108,7 @@ Figure 2.1 — Comparison module LUT
 | 1110              | 1            |
 | 1111              | 1            |
 
-In paralel of the comparison, a first block named 'Circuit A' converts the binary number signal to extract the first figit of the number. The logic would be than when the number is 10, the first diplay would show the first digit beeng 0. And consequently, 11-->1, 12-->2, etc.
+In parallel with the comparator, a block named Circuit A converts the binary input to determine the first digit of the decimal number. For example, when the input is 10, Circuit A outputs 0 for the first display. Similarly, 11→1, 12→2, etc..
 
 Figure 2.2 — Circuit A module LUT
 
@@ -131,7 +131,7 @@ Figure 2.2 — Circuit A module LUT
 | 1110              | 0100               |
 | 1111              | 0101               |
 
-With the output signal of the comparison block, another moduled named 'Circuit B' will determine when to display the second digit of the input, in this cas a '1'.
+With the output signal of the comparison block, another module, Circuit B, determines when to activate the second display (showing ‘1’) for numbers ≥10.
 
 Figure 2.3 — Circuit B module LUT
 
@@ -185,7 +185,7 @@ Add two binary numbers and a carry-in, and display the result in the LEDs.
 
 
 ### Logic / Design
-A full adder module needs to be created, adding two bits and a carry in. It will output two bits, the carry out and the  that will be displayed in the LEDs at first.
+A full adder module needs to be created, adding two bits and a carry in. It outputs two values: the sum bit and the carry-out. These are first displayed using LEDs.
 
 Figure 3.1 — FA module LUT
 
@@ -200,7 +200,7 @@ Figure 3.1 — FA module LUT
 | 1       1       0     | 1       0         |
 | 1       1       1     | 1       1         |
 
-With four of this FA module a 4-bit ripple-carry will be made connecting the carry out of each module to the carry-in of the next one. The uotput will be four bits plus the carry-out.
+With four of this FA module a 4-bit ripple-carry will be made connecting the carry out of each module to the carry-in of the next one. The output is a 4-bit sum plus a carry-out.
 
 *Figure 3.2 — 4-bit adder (ripple-carry) Design*
 
@@ -241,7 +241,7 @@ Add two decimal numbers (8 bits each) and a carry-in, and display numbers and th
 
 
 ### Logic / Design
-The logic from previous parts can be used but adapted. A third 'circuit C' module is created into the previous binary to decimal module to contemplate the numbers highers than 15 when a carry-in is active. Coverting them into the first digit for the display. For example 16 to 6 up to 19. In essence, adding 6.
+The logic from previous parts can be used but adapted. A third 'circuit C' module is created into the previous binary to decimal module to contemplate the numbers highers than 15 when a carry-in is active. This conversion adjusts the input so that values above 15 are correctly displayed. For example, 16 becomes 6, 17→7, up to 19→9. This is equivalent to adding 6 when a carry-in is active.
 
 Figure 4.1 — Circuit C module LUT
 
@@ -280,7 +280,7 @@ Figure 4.1 — Circuit C module LUT
 | 1111      0       |   1111       |
 | 1111      1       |   1101       |   
 
-For the check binary functionality, a new module is created to verify if the input values are higher than 9, using the module 'comparison' from previous parts. And inlcuding OR gates to implement the carry-in bit into the multiplexers, the module to convert binary to decimal now includes up to 19.
+For the check binary functionality, a new module is created to verify if the input values are higher than 9, using the module 'comparison' from previous parts. And including OR gates to implement the carry-in bit into the multiplexers, the module to convert binary to decimal now contemplates up to 19.
 
 *Figure 4.2 — Binary to decimal module Design*
 
@@ -323,11 +323,12 @@ And a descriptive picture of how the main module is designed.
 <h2 id="Part V">Part V — Two digit BCD numbers adder</h2>  
 
 ### Objective
-Add two digit BDC numbers (8 bits each) and display numbers and the result in the 7-segments dsiplays.
+Add two two-digit BCD numbers (8 bits each) and display both operands and the result on 7-segment displays.
 
 
 ### Logic / Design
-The 4-bit Adder logic from previous parts can be used. In this case, with only 10 switches in the DE10-Lite FPGA avaliable to use it as inputs, one of the BDC number will be constant. One first adder will add the firts digit of the BCD numbers and another the second one. The carry-out signal of the first one will be connected to the carry-in input of the second one. And again, the 'CheckBCD' module will indicate if the input number is higher than 99.
+The 4-bit Adder logic from previous parts can be used. In this case, with only 10 switches in the DE10-Lite FPGA avaliable to use it as inputs, one of the BDC number will be constant. 
+One first adder will add the firts digit of the BCD numbers and another the second one. The carry-out signal of the first one will be connected to the carry-in input of the second one. And again, the 'CheckBCD' module will indicate if any of the digits of the input is higher than 9.
 
 *Figure 5.1 — BCD adder module Design*
 
@@ -356,13 +357,13 @@ Add two digit BDC numbers (8 bits each) and display numbers and the result in th
 
 
 ### Logic / Design
-Instead of using the modules from previous parts, a statements logic approach will be used. 
+Instead of reusing the earlier modules, this part implements the design directly with behavioral Verilog (using conditional statements).
 
 *Figure 6.1 — Statements logic*
 
 <img src="IMG/Part_VI_StatementLogic.png" width="150">
 
-Using the logic from the excercice, a new set of reg variables are declared to operate them. When adding the digits form the BCD numbers independently, a comparison needs to be made to determin if the value is haigher than 9. If true, the first digit will result of an addiional 6 to be accurate. And the carry out will be added to the second digit operation. Then the operation results will be displayed in the 7-segment displays. In this case, a constant of 50 will be used to demonstrate the funcitolanlity and again, the 'CheckBCD' module will indicate if the input number is higher than 99.
+Using the logic give in the excercice, a new set of reg variables are declared to operate them. When adding the digits form the BCD numbers independently, a comparison checks if the digit is >9. If so, 6 is added to the value to ensure a valid BCD representation. And the carry out will be added to the second digit operation. Then the operation results will be displayed in the 7-segment displays. In this case, a constant of 50 will be used to demonstrate the funcitolanlity and again, the 'CheckBCD' module will indicate if the input number is higher than 99.
 
 With the RTL Viewer, it can be stablished that the logic from this part matches the one from previous parts, consecuently the functionality will remain the same.
 
@@ -393,7 +394,7 @@ Display a 6-bit binary number into a 7-segments display in BCD.
 
 
 ### Logic / Design
-To display a 6-bit decimal into BCD it needs to be used the operations / and % to devide the ones units to the tens units. With it, the number can be displayed up to 63.
+To display a 6-bit binary number as BCD, division (/) and modulo (%) operations are used to separate the tens and units digits.
 
 
 ### Implementation
