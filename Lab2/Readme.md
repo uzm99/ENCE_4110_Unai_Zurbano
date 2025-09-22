@@ -362,7 +362,7 @@ Instead of using the modules from previous parts, a statements logic approach wi
 
 <img src="IMG/Part_VI_StatementLogic.png" width="300">
 
-Using the logic from the excercice, a new set of reg variables are declared to operate them. When adding the digits form the BCD numbers independently, a comparison needs to be made to determin if the value is haigher than 9. If true, the first digit will result of an addiional 6 to be accurate. And the carry out will be added to the second digit operation. Then the operation results will be displayed in the 7-segment displays. And again, the 'CheckBCD' module will indicate if the input number is higher than 99.
+Using the logic from the excercice, a new set of reg variables are declared to operate them. When adding the digits form the BCD numbers independently, a comparison needs to be made to determin if the value is haigher than 9. If true, the first digit will result of an addiional 6 to be accurate. And the carry out will be added to the second digit operation. Then the operation results will be displayed in the 7-segment displays. In this case, a constant of 50 will be used to demonstrate the funcitolanlity and again, the 'CheckBCD' module will indicate if the input number is higher than 99.
 
 With the RTL Viewer, it can be stablished that the logic from this part matches the one from previous parts, consecuently the functionality will remain the same.
 
@@ -383,3 +383,28 @@ With the RTL Viewer, it can be stablished that the logic from this part matches 
 *Figure 6.4 — Two digit BCD adder with logic approach Demonstration*
 
 <img src="IMG/Part_VI_Demonstration.gif" width="500">
+
+
+
+<h2 id="Part VII">(extra) Part VII — 6-bit binary number to BCD</h2>  
+
+### Objective
+Display a 6-bit binary number into a 7-segments display in BCD.
+
+
+### Logic / Design
+To display a 6-bit decimal into BCD it needs to be used the operations / and % to devide the ones units to the tens units. With it, the number can be displayed up to 63.
+
+
+### Implementation
+
+*Figure 7.1 — Main module Implementation*
+
+<img src="IMG/Part_VII_main.png" width="500">
+
+
+### Demonstration
+
+*Figure 7.2 — 6-bit binary number to BCD Demonstration*
+
+<img src="IMG/Part_VII_Demonstration.gif" width="500">
