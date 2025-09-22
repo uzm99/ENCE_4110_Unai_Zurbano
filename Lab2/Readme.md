@@ -204,18 +204,18 @@ With four of this FA module a 4-bit ripple-carry will be made connecting the car
 
 *Figure 3.2 — 4-bit adder (ripple-carry) Design*
 
-<img src="IMG/Part_III_4-bit_Ripple-carry_Design.gif" width="500">
+<img src="IMG/Part_III_4-bit_Ripple-carry_Design.gif" width="700">
 
 
 ### Implementation
 
 *Figure 3.3 — FA module Implementation*
 
-<img src="IMG/Part_III_FA.png" width="500">
+<img src="IMG/Part_III_FA.png" width="700">
 
 *Figure 3.4 — 4-bit adder (ripple-carry) module Implementation*
 
-<img src="IMG/Part_III_4bit_adder.png" width="300">
+<img src="IMG/Part_III_4bit_adder.png" width="500">
 
 *Figure 3.5 — Main module Implementation*
 
@@ -288,33 +288,33 @@ For the check binary functionality, a new module is created to verify if the inp
 
 And a descriptive picture of how the main module is designed.
 
-*Figure 4.2 — Binary to decimal module Design*
+*Figure 4.3 — Binary to decimal module Design*
 
 <img src="IMG/Part_IV_main_design.png" width="500">
 
 
 ### Implementation
 
-*Figure 4.3 — Circuit C module Implementation*
+*Figure 4.4 — Circuit C module Implementation*
 
 <img src="IMG/Part_IV_circC.png" width="500">
 
-*Figure 4.4 — Check BCD module Implementation*
+*Figure 4.5 — Check BCD module Implementation*
 
 <img src="IMG/Part_IV_checkBCd.png" width="300">
 
-*Figure 4.5 — Binary to decimal module Implementation*
+*Figure 4.6 — Binary to decimal module Implementation*
 
-<img src="IMG/Part_IV_b2d.png" width="300">
+<img src="IMG/Part_IV_b2d.png" width="500">
 
-*Figure 4.6 — Main module Implementation*
+*Figure 4.7 — Main module Implementation*
 
 <img src="IMG/Part_IV_main.png" width="500">
 
 
 ### Demonstration
 
-*Figure 4.7 — 8-bit adder (ripple-carry) Demonstration*
+*Figure 4.8 — 8-bit adder (ripple-carry) Demonstration*
 
 <img src="IMG/Part_IV_Demonstration.gif" width="500">
 
@@ -360,7 +360,7 @@ Instead of using the modules from previous parts, a statements logic approach wi
 
 *Figure 6.1 — Statements logic*
 
-<img src="IMG/Part_VI_StatementLogic.png" width="300">
+<img src="IMG/Part_VI_StatementLogic.png" width="150">
 
 Using the logic from the excercice, a new set of reg variables are declared to operate them. When adding the digits form the BCD numbers independently, a comparison needs to be made to determin if the value is haigher than 9. If true, the first digit will result of an addiional 6 to be accurate. And the carry out will be added to the second digit operation. Then the operation results will be displayed in the 7-segment displays. In this case, a constant of 50 will be used to demonstrate the funcitolanlity and again, the 'CheckBCD' module will indicate if the input number is higher than 99.
 
@@ -368,14 +368,14 @@ With the RTL Viewer, it can be stablished that the logic from this part matches 
 
 *Figure 6.2 — RTL Viewer*
 
-<img src="IMG/Part_VI_RTLViewer.png" width="500">
+<img src="IMG/Part_VI_RTLViewer.png" width="800">
 
 
 ### Implementation
 
 *Figure 6.3 — Main module Implementation*
 
-<img src="IMG/Part_VI_main.png" width="500">
+<img src="IMG/Part_VI_main.png" width="400">
 
 
 ### Demonstration
