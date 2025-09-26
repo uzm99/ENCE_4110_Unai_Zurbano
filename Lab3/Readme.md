@@ -23,17 +23,19 @@ The purpose of this exercise is to investigate latches, flip-flops, and register
 <h2 id="Part I">Part I — Gated RS Latch</h2>  
 
 ### Objective
-Create a gated SR Latch as an storage element. It will update the output state only when the enable signal is active.
+Create a gated SR latch as a storage element. It updates the output state only when the enable signal is active.
 
 
 ### Logic / Design
-A module is created as a Gated SR Latch. With S (Set), R (Reset) and clk (clock) as inputs it will desplay the value storaged. If S signal is active and the clk signal too, the active value will remain in the output. Until the R signal and the clk signal are active at the same time, reseting the output.
+A module is created as a gated SR latch. With S (Set), R (Reset), and clk (clock) as inputs, it will display the stored value.
+- If both S and clk are active, the output is set to 1 and remains stored.
+- If both R and clk are active, the output is reset to 0
 
 Figure 1.1 — Gated SR Latch Design
 
 <img src="IMG/Part_I_SRLatch_Design.gif" width="500">
 
-With the RTL Viewer, it can be stablished that the logic from this part matches the Verilog code, consecuently the functionality will remain the same.
+The RTL Viewer confirms that the logic matches the Verilog code; consequently, the functionality is preserved.
 
 Figure 1.2 — Gated SR Latch RTL Viewer
 
@@ -64,17 +66,19 @@ To be able to observe the internal signals when compiled, it is necesary to incl
 <h2 id="Part II">Part II — Gated D Latch</h2>  
 
 ### Objective
-Create a gated D Latch as an storage element. It will update the output state when the enable signal is active.
+Create a gated D Latch as a storage element. It updates the output state when the enable signal is active.
 
 
 ### Logic / Design
-A module is created as a Gated D Latch. With D (Set) and clk (clock) as inputs it will desplay the value storaged. If D signal is active and the clk signal too, the active value will remain in the output. And only when the clk signal is active and D signal 0, the output will reset.
+A module is created as a gated D latch. With D (data) and clk (clock) as inputs, it will display the stored value.
+- When clk is active and D = 1, the output is set to 1.
+- When clk is active and D = 0, the output resets to 0.
 
 Figure 2.1 — Gated D Latch Design
 
 <img src="IMG/Part_II_DLatch_Design.gif" width="500">
 
-With the RTL Viewer, it can be stablished that the logic from this part matches the Verilog code, consecuently the functionality will remain the same.
+The RTL Viewer confirms that the logic matches the Verilog code; consequently, the functionality is preserved.
 
 Figure 2.2 — Gated D Latch RTL Viewer
 
@@ -103,17 +107,18 @@ Figure 2.2 — Gated D Latch RTL Viewer
 <h2 id="Part III">Part III — Master-slave D Flip-flop</h2>  
 
 ### Objective
-Create a gated D Flip-flop as an storage element. It will store the output state when the enable signal is active.
+Create a D flip-flop using two D latch modules. It stores the output state on the clock edge.
 
 
 ### Logic / Design
-A module is created as a D Flip-flop using two D latch modules. With D (Set) and clk (clock) as inputs it will desplay the value storaged. If D signal is active and the clk signal too, the active value will be stored in the output.
+A module is created as a master-slave D flip-flop using two gated D latches. With D (data) and clk (clock) as inputs, it will display the stored value.
+- On the clock transition, the master latch captures the input, and the slave latch updates the output accordingly.
 
 Figure 3.1 — D Flip-flop Design
 
-<img src="IMG/Part_III_DFlipflop_Design.gif" width="500">
+<img src="IMG/Part_III_DFlipFlop_Design.gif" width="500">
 
-With the RTL Viewer, it can be stablished that the logic from this part matches the Verilog code, consecuently the functionality will remain the same.
+The RTL Viewer confirms that the logic matches the Verilog code; consequently, the functionality is preserved.
 
 Figure 3.2 — D Flip-flop RTL Viewer
 
@@ -124,7 +129,7 @@ Figure 3.2 — D Flip-flop RTL Viewer
 
 *Figure 3.3 — Main module Implementation*
 
-<img src="IMG/Part_III_main.png" width="500">
+<img src="IMG/Part_III_main_logic.png" width="500">
 
 
 ### Demonstration
@@ -142,20 +147,20 @@ Instantiate the three storage elements: D Latch, Positive-edge triggered D Flip-
 
 
 ### Logic / Design
-Using the modules from previous parts, the behavioral style Verilog code is implemented.
+Using the modules from previous parts, a behavioral-style Verilog implementation is created.
 
-With the RTL Viewer, it can be stablished that the logic from this part matches the Verilog code, consecuently the functionality will remain the same.
+The RTL Viewer confirms that the logic matches the Verilog code; consequently, the functionality is preserved.
 
 Figure 4.1 — Storage elements RTL Viewer
 
-<img src="IMG/Part_IV_DFlipflop_RTLViewer.png" width="700">
+<img src="IMG/Part_IV_DFlipflop_RTLViewer.png" width="500">
 
 
 ### Implementation
 
 *Figure 4.2 — D Latch module Implementation*
 
-<img src="IMG/Part_IV_DLatch_logic.png" width="500">
+<img src="IMG/Part_IV_DLatch_logic.png" width="300">
 
 *Figure 4.3 — Positive-edge D Flip-flop module Implementation*
 
@@ -163,7 +168,7 @@ Figure 4.1 — Storage elements RTL Viewer
 
 *Figure 4.4 — Negative-edge D Flip-flop module Implementation*
 
-<img src="IMG/Part_IV_DFlipflop_neg_logic.png" width="500">
+<img src="IMG/Part_IV_DFlipflop_neg_logic.png" width="300">
 
 *Figure 4.5 — Main module Implementation*
 
@@ -181,13 +186,15 @@ Figure 4.1 — Storage elements RTL Viewer
 <h2 id="Part V">Part V — Store and display two 8-bit BCD numbers in 7-segment display</h2>  
 
 ### Objective
-Store and display the values of two 8-bit BDC numbers using the same input switches.
+Store and display the values of two 8-bit BCD numbers using the same input switches.
 
 
 ### Logic / Design
-A first 8-bit input 'A' will be set in the switches. Once the input Set signal is active, the value will be stored and displayed in three 7-segments displays. Then a second 8-bit input 'B' can be set using the same switches and with the Set signal active, the value will be stored and displayed in three 7-segments displays. Only when setting the signal Reset to active, the values will be errased.
+- The first 8-bit input A is set using the switches. When the Set input is activated, the value is stored and displayed on three 7-segment displays.
+- The second 8-bit input B is then set using the same switches. When the Set input is activated again, the value is stored and displayed on three 7-segment displays.
+- When the Reset input is activated, both stored values are erased.
 
-With the RTL Viewer, it can be seen the functionality using Flip Flops.
+The RTL Viewer confirms the functionality using flip-flops.
 
 Figure 5.1 — Storage elements and logic RTL Viewer
 
