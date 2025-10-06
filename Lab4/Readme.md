@@ -135,9 +135,7 @@ Create a 16-bit synchronous counter using an LPM module from the Library of Para
 ### Logic / Design
 An LPM modules is generated with an enable and synchronous clear to be consistent with the same design from previous parts
 
-*Figure 3.1 — LPM Counter Configuration*
 
-<img src="IMG/Part_III_LPM_counter_Config.gif" width="500">
 
 
 ### Implementation
