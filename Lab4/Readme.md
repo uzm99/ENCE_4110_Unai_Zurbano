@@ -8,7 +8,7 @@ The purpose of this exercise is to build and use counters.
 
 <!-- Table of content -->
 <nav>
-  <h1>Table of Contents</h2>
+  <h1>Table of Contents</h1>
   <ul>
     <li><a href="#Part I">Part I</a></li>
     <li><a href="#Part II">Part II</a></li>
@@ -23,13 +23,13 @@ The purpose of this exercise is to build and use counters.
 <h2 id="Part I">Part I — T Flip-Flop counter</h2>  
 
 ### Objective
-Create a 4-bit synchronous counter wich uses four T-type flip-flops. 
+Create a 4-bit synchronous counter using four T-type flip-flops.
 
 
 ### Logic / Design
-A module is created as a T Flip-flop. With T (Set) and clk (clock) as inputs, and a D Flip-flop with two AND gates and a OR gate. It toggles the value.
-- If both T and clk are active, the output is toggled from 1 to 0. or 0 to 1.
-With a 1-bit T Flip-Flop, a counter can be created instantiating the modules. In this case, an 8-bit counter will be implemented. But for fucntionality verification porpuses using Logisim, a 4-bit counter will has been designed.
+A module is created for a T flip-flop, with T (set) and clk (clock) as inputs, based on a D flip-flop with two AND gates and one OR gate. It toggles the output value:
+- If both T and clk are active, the output toggles from 0 to 1 or from 1 to 0.
+With a 1-bit T flip-flop, a counter can be created by instantiating multiple modules. In this case, an 8-bit counter is implemented, but for functionality verification purposes using Logisim, a 4-bit counter has been designed.
 
 *Figure 1.1 — T-Flip-flop 1-bit Design*
 
@@ -49,7 +49,7 @@ The RTL Viewer confirms that the logic matches the Verilog code; consequently, t
 
 <img src="IMG/Part_I_TFlipflop_8bit_RTLViewer.png" width="700">
 
-From this excercices and go on, to aviod double bounce with the switches and the buttons as a harware issue, a 1s counter from previous excercices has been implemented to act as a clock (clk) signal. 
+From this exercise onward, to avoid switch and button bouncing (a hardware issue), a 1-second counter from previous labs has been used to act as a clock (clk) signal.
 
 
 ### Implementation
@@ -58,7 +58,7 @@ From this excercices and go on, to aviod double bounce with the switches and the
 
 <img src="IMG/Part_I_TFlipflop_1bit_logic.png" width="400">
 
-*Figure 1.6 — T-Flip-flop 1-bit Main block Implementation*
+*Figure 1.6 — T-Flip-flop 1-bit Main module Implementation*
 
 <img src="IMG/Part_I_TFlipflop_1bit_main_logic.png" width="500">
 
@@ -66,11 +66,11 @@ From this excercices and go on, to aviod double bounce with the switches and the
 
 <img src="IMG/Part_I_TFlipflop_8bit_logic.png" width="400">
 
-*Figure 1.8 — T-Flip-flop 8-bit Main block Implementation*
+*Figure 1.8 — T-Flip-flop 8-bit Main module Implementation*
 
 <img src="IMG/Part_I_TFlipflop_8bit_main_logic.png" width="500">
 
-*Figure 1.9 — T-Flip-flop 8-bit to 7-segment display Main block Implementation*
+*Figure 1.9 — T-Flip-flop 8-bit to 7-segment display Main module Implementation*
 
 <img src="IMG/Part_I_TFlipflop_8bit_HEX_main_logic.png" width="500">
 
@@ -94,13 +94,14 @@ From this excercices and go on, to aviod double bounce with the switches and the
 <h2 id="Part II">Part II — 16-bit Counter</h2>  
 
 ### Objective
-Create a 16-bit synchronous counter using a register and adding 1 to its value. 
+Create a 16-bit synchronous counter using a register that adds 1 to its value.
 
 
 ### Logic / Design
-A module is created as an adder using secuential logic and the expresion Q <= Q + 1.
+A module is created as an adder using sequential logic with the expression:
+Q <= Q + 1
 
-The RTL Viewer shows again a D Flip-flop implemented with the output carried into the D signal with an Add block.
+The RTL Viewer shows a D flip-flop implemented with the output carried into the D input through an adder block.
 
 *Figure 2.1 — 16-bit Counter RTL Viewer*
 
@@ -113,7 +114,7 @@ The RTL Viewer shows again a D Flip-flop implemented with the output carried int
 
 <img src="IMG/Part_II_counter_16bit_logic.png" width="400">
 
-*Figure 2.3 — Main block Implementation*
+*Figure 2.3 — Main Module Implementation*
 
 <img src="IMG/Part_II_main_logic.png" width="500">
 
@@ -129,11 +130,11 @@ The RTL Viewer shows again a D Flip-flop implemented with the output carried int
 <h2 id="Part III">Part III — 16-bit Counter with an LPM </h2>  
 
 ### Objective
-Create a 16-bit synchronous counter using an LPM module from the Library of Parameterized modules. 
+Create a 16-bit synchronous counter using an LPM (Library of Parameterized Modules) component.
 
 
 ### Logic / Design
-An LPM modules is generated with an enable and synchronous clear to be consistent with the same design from previous parts.
+An LPM counter module is generated with an enable and synchronous clear to match the previous designs.
 
 *Figure 3.1 — LPM Counter Configuration*
 
@@ -158,15 +159,15 @@ An LPM modules is generated with an enable and synchronous clear to be consisten
 <h2 id="Part IV">Part IV — BCD Counter</h2>  
 
 ### Objective
-Create a BCD counter in one second intervals. 
+Create a BCD counter operating at one-second intervals.
 
 
 ### Logic / Design
-A 1 second counter module is created using the previos parts. Instead of generating a model for 1 second only, a generic clock reduction module is implemented. This way, if the frequecy of the clock is needed to adjust, only a local parameter in the main module is modified.
+A 1-second counter module is created using previous components. Instead of generating a fixed 1-second model, a generic clock divider module is implemented. This allows frequency adjustment by simply modifying a local parameter in the main module.
 
-Another BCD counter module is implemented to increment the value each second and count tens, hundreds and thousands when the previous digit reaches 9. 
+A BCD counter module increments the value each second and counts tens, hundreds, and thousands when the previous digit reaches 9.
+Each digit is then displayed on the 7-segment displays using a BCD decoder module.
 
-And the individual digits are displayed in the 7-segmetn displays using a BCD decoder module.
 
 ### Implementation
 
@@ -198,15 +199,13 @@ And the individual digits are displayed in the 7-segmetn displays using a BCD de
 <h2 id="Part V">Part V — Display HELLO in ticker-tape fashion</h2>  
 
 ### Objective
-Display the word HELLO in ticker-tape fashion in the 7-segments displays, making the letters move from right to left in intervals of 1 second. 
+Display the word HELLO in ticker-tape fashion on the 7-segment displays, moving the letters from right to left every second.
 
 
 ### Logic / Design
-The same logic is used from previous part to get the 1 second signal from the clock reduction module. Additionally, a generic count module is implemented to determine the state of each display. 
+The same clock reduction module from the previous part is used to obtain a 1-second signal. Additionally, a generic counter module determines the state of each display.
+Using the resulting count, a HELLO Decoder module determines which letter to display on each 7-segment display. A second decoder module then activates the appropriate segments to form the corresponding letter.
 
-And with the result of the adding operation, a HELLO Decoder module determines the letter that needs to be displayed on each 7-segmetn displays.
-
-There is another Decoder module to determin which segments are needed to display the letter correspondingly.
 
 ### Implementation
 
@@ -229,6 +228,6 @@ There is another Decoder module to determin which segments are needed to display
 
 ### Demonstration
 
-*Figure 5.5 — HELLO moviment Demonstration*
+*Figure 5.5 — HELLO movement Demonstration*
 
 <img src="IMG/Part_V_Demonstration.gif" width="500">
