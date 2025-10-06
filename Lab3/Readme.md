@@ -3,7 +3,7 @@
 ![Simulator](https://img.shields.io/badge/Tool-Logisim-orange)
 # Lab 3 — Latches, Flip-flops, and Registers (FPGA DE10-Lite)
 
-This repository documents the second FPGA lab using the DE10-Lite (MAX 10 10M50DAF484C7G).  
+This repository documents the third FPGA lab using the DE10-Lite (MAX 10 10M50DAF484C7G).  
 The purpose of this exercise is to investigate latches, flip-flops, and registers.
 
 <!-- Table of content -->
