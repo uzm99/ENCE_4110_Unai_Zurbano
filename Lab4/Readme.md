@@ -31,21 +31,21 @@ A module is created as a T Flip-flop. With T (Set) and clk (clock) as inputs, an
 - If both T and clk are active, the output is toggled from 1 to 0. or 0 to 1.
 With a 1-bit T Flip-Flop, a counter can be created instantiating the modules. In this case, an 8-bit counter will be implemented. But for fucntionality verification porpuses using Logisim, a 4-bit counter will has been designed.
 
-Figure 1.1 — T-Flip-flop 1-bit Design
+*Figure 1.1 — T-Flip-flop 1-bit Design*
 
 <img src="IMG/Part_I_TFlipFlop_1bit_Design.gif" width="500">
 
-Figure 1.2 — T-Flip-flop 4-bit Counter Design
+*Figure 1.2 — T-Flip-flop 4-bit Counter Design*
 
 <img src="IMG/Part_I_TFlipFlop_4bit_counter_Design.gif" width="500">
 
 The RTL Viewer confirms that the logic matches the Verilog code; consequently, the functionality is preserved.
 
-Figure 1.3 — T-Flip-flop 1-bit RTL Viewer
+*Figure 1.3 — T-Flip-flop 1-bit RTL Viewer*
 
 <img src="IMG/Part_I_TFlipflop_1bit_RTLViewer.png" width="700">
 
-Figure 1.4 — T-Flip-flop 8-bit RTL Viewer
+*Figure 1.4 — T-Flip-flop 8-bit RTL Viewer*
 
 <img src="IMG/Part_I_TFlipflop_8bit_RTLViewer.png" width="700">
 
@@ -102,7 +102,7 @@ A module is created as an adder using secuential logic and the expresion Q <= Q 
 
 The RTL Viewer shows again a D Flip-flop implemented with the output carried into the D signal with an Add block.
 
-Figure 2.1 — 16-bit Counter RTL Viewer
+*Figure 2.1 — 16-bit Counter RTL Viewer*
 
 <img src="IMG/Part_II_counter_16bit_RTLViewer.png" width="500">
 
@@ -135,7 +135,7 @@ Create a 16-bit synchronous counter using an LPM module from the Library of Para
 ### Logic / Design
 An LPM modules is generated with an enable and synchronous clear to be consistent with the same design from previous parts
 
-Figure 3.1 — LPM Counter Configuration
+*Figure 3.1 — LPM Counter Configuration*
 
 <img src="IMG/Part_III_LPM_counter_Config.gif" width="500">
 
