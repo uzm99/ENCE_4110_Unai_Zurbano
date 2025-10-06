@@ -27,39 +27,128 @@ Create a 4-bit synchronous counter wich uses four T-type flip-flops.
 
 
 ### Logic / Design
-A module is created as a T Flip-flop. With T (Set), R (Reset), and clk (clock) as inputs, it will display the stored value.
-- If both S and clk are active, the output is set to 1 and remains stored.
-- If both R and clk are active, the output is reset to 0
+A module is created as a T Flip-flop. With T (Set) and clk (clock) as inputs, and a D Flip-flop with two AND gates and a OR gate. It toggles the value.
+- If both T and clk are active, the output is toggled from 1 to 0. or 0 to 1.
+With a 1-bit T Flip-Flop, a counter can be created instantiating the modules. In this case, an 8-bit counter will be implemented. But for fucntionality verification porpuses using Logisim, a 4-bit counter will has been designed.
 
-Figure 1.1 — Gated SR Latch Design
+Figure 1.1 — T-Flip-flop 1-bit Design
 
-<img src="IMG/Part_I_SRLatch_Design.gif" width="500">
+<img src="IMG/Part_I_TFlipFlop_1bit_Design.gif" width="500">
+
+Figure 1.2 — T-Flip-flop 4-bit Counter Design
+
+<img src="IMG/Part_I_TFlipFlop_4bit_counter_Design.gif" width="500">
 
 The RTL Viewer confirms that the logic matches the Verilog code; consequently, the functionality is preserved.
 
-Figure 1.2 — Gated SR Latch RTL Viewer
+Figure 1.3 — T-Flip-flop 1-bit RTL Viewer
 
-<img src="IMG/Part_I_SRLatch_RTLViewer.png" width="700">
+<img src="IMG/Part_I_TFlipflop_1bit_RTLViewer.png" width="700">
 
-To be able to observe the internal signals when compiled, it is necesary to include the compiler directive ("/* synthesis keep /*").
+Figure 1.4 — T-Flip-flop 8-bit RTL Viewer
+
+<img src="IMG/Part_I_TFlipflop_8bit_RTLViewer.png" width="700">
+
+From this excercices and go on, to aviod double bounce with the switches and the buttons as a harware issue, a 1s counter from previous excercices has been implemented to act as a clock (clk) signal. 
 
 
 ### Implementation
 
-*Figure 1.3 — SR Latch Implementation*
+*Figure 1.5 — T-Flip-flop 1-bit Implementation*
 
-<img src="IMG/Part_I_SRLatch_logic.png" width="400">
+<img src="IMG/Part_I_TFlipflop_1bit_logic.png" width="400">
 
-*Figure 1.4 — Main block Implementation*
+*Figure 1.6 — T-Flip-flop 1-bit Main block Implementation*
 
-<img src="IMG/Part_I_main_logic.png" width="500">
+<img src="IMG/Part_I_TFlipflop_1bit_main_logic.png" width="500">
+
+*Figure 1.7 — T-Flip-flop 8-bit Implementation*
+
+<img src="IMG/Part_I_TFlipflop_8bit_logic.png" width="400">
+
+*Figure 1.8 — T-Flip-flop 8-bit Main block Implementation*
+
+<img src="IMG/Part_I_TFlipflop_8bit_main_logic.png" width="500">
+
+*Figure 1.9 — T-Flip-flop 8-bit to 7-segment display Main block Implementation*
+
+<img src="IMG/Part_I_TFlipflop_8bit_HEX_main_logic.png" width="500">
 
 
 ### Demonstration
 
-*Figure 1.5 — SR Latch Demonstration*
+*Figure 1.10 — T-Flip-flop 1-bit Demonstration*
 
-<img src="IMG/Part_I_Demonstration.gif" width="500">
+<img src="IMG/Part_I_TFlipflop_Demonstration.gif" width="500">
+
+*Figure 1.11 — T-Flip-flop 8-bit Counter Demonstration*
+
+<img src="IMG/Part_I_TFlipflop_8bitCounter_Demonstration.gif" width="500">
+
+*Figure 1.12 — T-Flip-flop 8-bit Counter to 7-segment display Demonstration*
+
+<img src="IMG/Part_I_TFlipflop_8bitCounter_HEX_Demonstration.gif" width="500">
 
 
 
+<h2 id="Part II">Part II — 16-bit Counter</h2>  
+
+### Objective
+Create a 16-bit synchronous counter using a register and adding 1 to its value. 
+
+
+### Logic / Design
+A module is created as an adder using secuential logic and the expresion Q <= Q + 1.
+
+The RTL Viewer shows again a D Flip-flop implemented with the output carried into the D signal with an Add block.
+
+Figure 2.1 — 16-bit Counter RTL Viewer
+
+<img src="IMG/Part_II_counter_16bit_RTLViewer.png" width="500">
+
+
+### Implementation
+
+*Figure 2.2 — 16-bit Counter Implementation*
+
+<img src="IMG/Part_II_counter_16bit_logic.png" width="400">
+
+*Figure 2.3 — Main block Implementation*
+
+<img src="IMG/Part_II_main_logic.png" width="500">
+
+
+### Demonstration
+
+*Figure 2.4 — 16-bit Counter Demonstration*
+
+<img src="IMG/Part_II_Demonstration.gif" width="500">
+
+
+
+<h2 id="Part III">Part III — 16-bit Counter with an LPM </h2>  
+
+### Objective
+Create a 16-bit synchronous counter using an LPM module from the Library of Parameterized modules. 
+
+
+### Logic / Design
+An LPM modules is generated with an enable and synchronous clear to be consistent with the same design from previous parts
+
+Figure 3.1 — LPM Counter Configuration
+
+<img src="IMG/Part_III_LPM_counter_Config.gif" width="500">
+
+
+### Implementation
+
+*Figure 3.2 — Main module Implementation*
+
+<img src="IMG/Part_III_main_logic.png" width="400">
+
+
+### Demonstration
+
+*Figure 3.3 — 16-bit LPM Counter Demonstration*
+
+<img src="IMG/Part_III_Demonstration.gif" width="500">
