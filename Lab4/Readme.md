@@ -133,9 +133,11 @@ Create a 16-bit synchronous counter using an LPM module from the Library of Para
 
 
 ### Logic / Design
-An LPM modules is generated with an enable and synchronous clear to be consistent with the same design from previous parts
+An LPM modules is generated with an enable and synchronous clear to be consistent with the same design from previous parts.
 
+*Figure 3.1 — LPM Counter Configuration*
 
+<img src="IMG/Part_III_LPM_counter_Config.gif" width="500">
 
 
 ### Implementation
@@ -150,3 +152,83 @@ An LPM modules is generated with an enable and synchronous clear to be consisten
 *Figure 3.3 — 16-bit LPM Counter Demonstration*
 
 <img src="IMG/Part_III_Demonstration.gif" width="500">
+
+
+
+<h2 id="Part IV">Part IV — BCD Counter</h2>  
+
+### Objective
+Create a BCD counter in one second intervals. 
+
+
+### Logic / Design
+A 1 second counter module is created using the previos parts. Instead of generating a model for 1 second only, a generic clock reduction module is implemented. This way, if the frequecy of the clock is needed to adjust, only a local parameter in the main module is modified.
+
+Another BCD counter module is implemented to increment the value each second and count tens, hundreds and thousands when the previous digit reaches 9. 
+
+And the individual digits are displayed in the 7-segmetn displays using a BCD decoder module.
+
+### Implementation
+
+*Figure 4.1 — Clock reduction module Implementation*
+
+<img src="IMG/Part_IV_clk_reduction_logic.png" width="400">
+
+*Figure 4.2 — BCD Counter module Implementation*
+
+<img src="IMG/Part_IV_BCDcounter_logic.png" width="400">
+
+*Figure 4.3 — BCD Decoder module Implementation*
+
+<img src="IMG/Part_IV_BCDdecoder_logic.png" width="300">
+
+*Figure 4.4 — Main module Implementation*
+
+<img src="IMG/Part_IV_main_logic.png" width="600">
+
+
+### Demonstration
+
+*Figure 4.5 — BCD Counter Demonstration*
+
+<img src="IMG/Part_IV_Demonstration.gif" width="500">
+
+
+
+<h2 id="Part V">Part V — Display HELLO in ticker-tape fashion</h2>  
+
+### Objective
+Display the word HELLO in ticker-tape fashion in the 7-segments displays, making the letters move from right to left in intervals of 1 second. 
+
+
+### Logic / Design
+The same logic is used from previous part to get the 1 second signal from the clock reduction module. Additionally, a generic count module is implemented to determine the state of each display. 
+
+And with the result of the adding operation, a HELLO Decoder module determines the letter that needs to be displayed on each 7-segmetn displays.
+
+There is another Decoder module to determin which segments are needed to display the letter correspondingly.
+
+### Implementation
+
+*Figure 5.1 — Counter up module Implementation*
+
+<img src="IMG/Part_V_counter_logic.png" width="400">
+
+*Figure 5.2 — HELLO Decoder module Implementation*
+
+<img src="IMG/Part_V_HELLOdecoder_logic.png" width="600">
+
+*Figure 5.3 — 7-segment display decoder module Implementation*
+
+<img src="IMG/Part_V_7segment_HELLOdecoder_logic.png" width="400">
+
+*Figure 5.4 — Main module Implementation*
+
+<img src="IMG/Part_V_main_logic.png" width="800">
+
+
+### Demonstration
+
+*Figure 5.5 — HELLO moviment Demonstration*
+
+<img src="IMG/Part_V_Demonstration.gif" width="500">
