@@ -1,10 +1,10 @@
 ![FPGA](https://img.shields.io/badge/FPGA-DE10--Lite-blue)
 ![Language](https://img.shields.io/badge/Language-Verilog-green)
 ![Simulator](https://img.shields.io/badge/Tool-Logisim-orange)
-# Lab 4 — Counters (FPGA DE10-Lite)
+# Lab 5 — Adders, Subtractors, and Multipliers (FPGA DE10-Lite)
 
-This repository documents the fourth FPGA lab using the DE10-Lite (MAX 10 10M50DAF484C7G).  
-The purpose of this exercise is to build and use counters.
+This repository documents the 5th FPGA lab using the DE10-Lite (MAX 10 10M50DAF484C7G).  
+The purpose of this exercise is to examine arithmetic circuits that add, subtract, and multiply numbers.
 
 <!-- Table of content -->
 <nav>
@@ -23,13 +23,12 @@ The purpose of this exercise is to build and use counters.
 <h2 id="Part I">Part I — T Flip-Flop counter</h2>  
 
 ### Objective
-Create a 4-bit synchronous counter using four T-type flip-flops.
+Create an 8-bit Accumulator circuit with an adder.
 
 
 ### Logic / Design
-A module is created for a T flip-flop, with T (set) and clk (clock) as inputs, based on a D flip-flop with two AND gates and one OR gate. It toggles the output value:
-- If both T and clk are active, the output toggles from 0 to 1 or from 1 to 0.
-With a 1-bit T flip-flop, a counter can be created by instantiating multiple modules. In this case, an 8-bit counter is implemented, but for functionality verification purposes using Logisim, a 4-bit counter has been designed.
+An 8.bit accumulator adder is made o two 8-bit registers to store the input value and the output result to beeing abla to opearate with them. A 1-bit register for the overflow and the Adder Logic Unit (ALU) to process the operation. The design represented on the Figure 1.1 shows the label wires to clarify the conection between the Registers and the ALU. The registers are universal modules to adapt to the number of bits needed. 
+And to avoid bouncing with the buttons, a debounce module is provided to eliminate that mechanical error.
 
 *Figure 1.1 — T-Flip-flop 1-bit Design*
 
