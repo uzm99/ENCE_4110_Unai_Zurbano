@@ -20,73 +20,50 @@ The purpose of this exercise is to examine arithmetic circuits that add, subtrac
 
 
 <!-- Sections -->
-<h2 id="Part I">Part I — T Flip-Flop counter</h2>  
+<h2 id="Part I">Part I — 8-bit Accumulator adder</h2>  
 
 ### Objective
 Create an 8-bit Accumulator circuit with an adder.
 
 
 ### Logic / Design
-An 8.bit accumulator adder is made o two 8-bit registers to store the input value and the output result to beeing abla to opearate with them. A 1-bit register for the overflow and the Adder Logic Unit (ALU) to process the operation. The design represented on the Figure 1.1 shows the label wires to clarify the conection between the Registers and the ALU. The registers are universal modules to adapt to the number of bits needed. 
+An 8.bit accumulator adder is made o two 8-bit registers to store the input value and the output result to beeing abla to opearate with them. A 1-bit register for the overflow and the Adder Logic Unit (ALU) to process the operation. The design represented on the Figure 1.1 shows the label wires to clarify the conection between the Registers and the ALU. The register module and adder module are universal modules to adapt to the number of bits needed. 
 And to avoid bouncing with the buttons, a debounce module is provided to eliminate that mechanical error.
+The modules used to Decode the number in binary to BCD and desiplayed in the 7-segment displayed are taken form previous labs.
 
-*Figure 1.1 — T-Flip-flop 1-bit Design*
+*Figure 1.1 — 8-bit Accumulator Design*
 
-<img src="IMG/Part_I_TFlipFlop_1bit_Design.gif" width="500">
-
-*Figure 1.2 — T-Flip-flop 4-bit Counter Design*
-
-<img src="IMG/Part_I_TFlipFlop_4bit_counter_Design.gif" width="500">
-
-The RTL Viewer confirms that the logic matches the Verilog code; consequently, the functionality is preserved.
-
-*Figure 1.3 — T-Flip-flop 1-bit RTL Viewer*
-
-<img src="IMG/Part_I_TFlipflop_1bit_RTLViewer.png" width="700">
-
-*Figure 1.4 — T-Flip-flop 8-bit RTL Viewer*
-
-<img src="IMG/Part_I_TFlipflop_8bit_RTLViewer.png" width="700">
-
-From this exercise onward, to avoid switch and button bouncing (a hardware issue), a 1-second counter from previous labs has been used to act as a clock (clk) signal.
+<img src="IMG/Part_I_Acc_8bit_design.png" width="500">
 
 
 ### Implementation
 
-*Figure 1.5 — T-Flip-flop 1-bit Implementation*
+*Figure 1.2 — Dbounce module Implementation*
 
-<img src="IMG/Part_I_TFlipflop_1bit_logic.png" width="400">
+<img src="IMG/Part_I_Dbounce_logic.png" width="400">
 
-*Figure 1.6 — T-Flip-flop 1-bit Main module Implementation*
+*Figure 1.3 — Register n-bit module Implementation*
 
-<img src="IMG/Part_I_TFlipflop_1bit_main_logic.png" width="500">
+<img src="IMG/Part_I_Reg_nbit_logic.png" width="500">
 
-*Figure 1.7 — T-Flip-flop 8-bit Implementation*
+*Figure 1.4 — Adder n-bit module Implementation*
 
-<img src="IMG/Part_I_TFlipflop_8bit_logic.png" width="400">
+<img src="IMG/Part_I_Adder_nbit_logic.png" width="400">
 
-*Figure 1.8 — T-Flip-flop 8-bit Main module Implementation*
+*Figure 1.5 — 8-bit Accumulator module Implementation*
 
-<img src="IMG/Part_I_TFlipflop_8bit_main_logic.png" width="500">
+<img src="IMG/Part_I_Acc_8bit_logic.png" width="500">
 
-*Figure 1.9 — T-Flip-flop 8-bit to 7-segment display Main module Implementation*
+*Figure 1.6 — Main module Implementation*
 
-<img src="IMG/Part_I_TFlipflop_8bit_HEX_main_logic.png" width="500">
+<img src="IMG/Part_I_main_logic.png" width="500">
 
 
 ### Demonstration
 
-*Figure 1.10 — T-Flip-flop 1-bit Demonstration*
+*Figure 1.7 — 8-bit Accumulator adder Demonstration*
 
 <img src="IMG/Part_I_TFlipflop_Demonstration.gif" width="500">
-
-*Figure 1.11 — T-Flip-flop 8-bit Counter Demonstration*
-
-<img src="IMG/Part_I_TFlipflop_8bitCounter_Demonstration.gif" width="500">
-
-*Figure 1.12 — T-Flip-flop 8-bit Counter to 7-segment display Demonstration*
-
-<img src="IMG/Part_I_TFlipflop_8bitCounter_HEX_Demonstration.gif" width="500">
 
 
 
