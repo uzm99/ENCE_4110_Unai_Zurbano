@@ -63,7 +63,7 @@ The modules used to Decode the number in binary to BCD and desiplayed in the 7-s
 
 *Figure 1.7 — 8-bit Accumulator adder Demonstration*
 
-<img src="IMG/Part_I_TFlipflop_Demonstration.gif" width="500">
+<img src="IMG/Part_I_Demonstration.gif" width="500">
 
 
 
