@@ -23,30 +23,34 @@ The purpose of this exercise is to examine arithmetic circuits that add, subtrac
 <h2 id="Part I">Part I — 8-bit Accumulator adder</h2>  
 
 ### Objective
-Create an 8-bit Accumulator circuit with an adder.
+Design and implement an 8-bit accumulator adder circuit using Verilog, capable of storing and adding input values through clock cycles.
 
 
 ### Logic / Design
-An 8.bit accumulator adder is made o two 8-bit registers to store the input value and the output result to beeing abla to opearate with them. A 1-bit register for the overflow and the Adder Logic Unit (ALU) to process the operation. The design represented on the Figure 1.1 shows the label wires to clarify the conection between the Registers and the ALU. The register module and adder module are universal modules to adapt to the number of bits needed. 
-And to avoid bouncing with the buttons, a debounce module is provided to eliminate that mechanical error.
-The modules used to Decode the number in binary to BCD and desiplayed in the 7-segment displayed are taken form previous labs.
+The design consists of:
+- Two 8-bit registers: one to store the input value and another to hold the accumulated result. 
+- A 1-bit register for the overflow flag.
+- An Adder Logic Unit (ALU) to perform the arithmetic operation.
+- A debounce module to eliminate mechanical bouncing from button inputs.
+- Binary-to-BCD conversion and 7-segment display modules (reused from previous labs).
+The circuit connects switches SW7–0 as inputs, with results shown on the 7-segment displays. The carry-out (overflow) is displayed on LEDR8.
 
 *Figure 1.1 — 8-bit Accumulator Design*
 
-<img src="IMG/Part_I_Acc_8bit_design.png" width="500">
+<img src="IMG/Part_I_Acc_8bit_design.png" width="300">
 
 
 ### Implementation
 
 *Figure 1.2 — Dbounce module Implementation*
 
-<img src="IMG/Part_I_Dbounce_logic.png" width="400">
+<img src="IMG/Part_I_Dbounce_logic.png" width="300">
 
-*Figure 1.3 — Register n-bit module Implementation*
+*Figure 1.3 — n-bit Register module Implementation*
 
-<img src="IMG/Part_I_Reg_nbit_logic.png" width="500">
+<img src="IMG/Part_I_Reg_nbit_logic.png" width="300">
 
-*Figure 1.4 — Adder n-bit module Implementation*
+*Figure 1.4 — n-bit Adder module Implementation*
 
 <img src="IMG/Part_I_Adder_nbit_logic.png" width="400">
 
@@ -56,7 +60,7 @@ The modules used to Decode the number in binary to BCD and desiplayed in the 7-s
 
 *Figure 1.6 — Main module Implementation*
 
-<img src="IMG/Part_I_main_logic.png" width="500">
+<img src="IMG/Part_I_main_logic.png" width="300">
 
 
 ### Demonstration
@@ -67,143 +71,160 @@ The modules used to Decode the number in binary to BCD and desiplayed in the 7-s
 
 
 
-<h2 id="Part II">Part II — 16-bit Counter</h2>  
+<h2 id="Part II">Part II — 8-bit Accumulator Adder/Subtractor</h2>  
 
 ### Objective
-Create a 16-bit synchronous counter using a register that adds 1 to its value.
+Extend the accumulator circuit to perform both addition and subtraction operations.
 
 
 ### Logic / Design
-A module is created as an adder using sequential logic with the expression:
-Q <= Q + 1
-
-The RTL Viewer shows a D flip-flop implemented with the output carried into the D input through an adder block.
-
-*Figure 2.1 — 16-bit Counter RTL Viewer*
-
-<img src="IMG/Part_II_counter_16bit_RTLViewer.png" width="500">
+Building on Part I, a control signal add_sub is introduced:
+- i_addsub = 0 → Perform addition
+- i_addsub = 1 → Perform subtraction
+This control signal is used in a conditional assignment within the ALU logic and switch SW8 is assigned as the operation selector.
 
 
 ### Implementation
 
-*Figure 2.2 — 16-bit Counter Implementation*
+*Figure 2.1 — Adder/Subtractor module Implementation*
 
-<img src="IMG/Part_II_counter_16bit_logic.png" width="400">
+<img src="IMG/Part_II_Adder_sub_nbit_logic.png" width="500">
 
-*Figure 2.3 — Main Module Implementation*
+*Figure 2.2 — 8-bit Accumulator module Implementation*
 
-<img src="IMG/Part_II_main_logic.png" width="500">
+<img src="IMG/Part_II_Acc_sub_8bit_logic.png" width="600">
+
+*Figure 2.3 — Main module Implementation*
+
+<img src="IMG/Part_II_main_logic.png" width="400">
 
 
 ### Demonstration
 
-*Figure 2.4 — 16-bit Counter Demonstration*
+*Figure 2.4 — 8-bit Accumulator adder/sub Demonstration*
 
 <img src="IMG/Part_II_Demonstration.gif" width="500">
 
 
 
-<h2 id="Part III">Part III — 16-bit Counter with an LPM </h2>  
+<h2 id="Part III">Part III — 4-bit Multiplication with Full Adders</h2>  
 
 ### Objective
-Create a 16-bit synchronous counter using an LPM (Library of Parameterized Modules) component.
+Design a 4-bit multiplier using full adders and logic gates.
 
 
 ### Logic / Design
-An LPM counter module is generated with an enable and synchronous clear to match the previous designs.
+The circuit multiplies two 4-bit binary numbers A and B to produce an 8-bit product P. Each partial product is formed using AND gates and added using full adders arranged in three summation stages, as illustrated below.
 
-*Figure 3.1 — LPM Counter Configuration*
+*Figure 3.1 — Multiplication Theory*
 
-<img src="IMG/Part_III_LPM_counter_Config.gif" width="500">
+<img src="IMG/Part_III_Multi_theory.png" width="400">
+
+*Figure 3.2 — Multiplication circuit design*
+
+<img src="IMG/Part_III_Multi_design.png" width="500">
 
 
 ### Implementation
 
-*Figure 3.2 — Main module Implementation*
+*Figure 3.3 — 1st Stage Multiplier Implementation*
+
+<img src="IMG/Part_III_1Stage_Add_logic.png" width="400">
+
+*Figure 3.4 — 2nd Stage Multiplier Implementation*
+
+<img src="IMG/Part_III_2Stage_Add_logic.png" width="400">
+
+*Figure 3.5 — 3rd Stage Multiplier Implementation*
+
+<img src="IMG/Part_III_3Stage_Add_logic.png" width="400">
+
+*Figure 3.6 — Main module Implementation*
 
 <img src="IMG/Part_III_main_logic.png" width="400">
 
 
 ### Demonstration
 
-*Figure 3.3 — 16-bit LPM Counter Demonstration*
+*Figure 3.7 — 4-bit multiplier Demonstration*
 
 <img src="IMG/Part_III_Demonstration.gif" width="500">
 
 
 
-<h2 id="Part IV">Part IV — BCD Counter</h2>  
+<h2 id="Part IV">Part IV — 8-bit Multiplication with n-bit Adders</h2>  
 
 ### Objective
-Create a BCD counter operating at one-second intervals.
+Implement an 8×8 multiplier using multiple n-bit adders to sum the partial products.
 
 
 ### Logic / Design
-A 1-second counter module is created using previous components. Instead of generating a fixed 1-second model, a generic clock divider module is implemented. This allows frequency adjustment by simply modifying a local parameter in the main module.
+The design extends the array multiplier concept to 8 bits, using seven n-bit adders to combine shifted partial products generated by AND gates. The structure is modular and reuses the previously verified adder modules.
 
-A BCD counter module increments the value each second and counts tens, hundreds, and thousands when the previous digit reaches 9.
-Each digit is then displayed on the 7-segment displays using a BCD decoder module.
+*Figure 4.1 — Multiplication circuit design*
+
+<img src="IMG/Part_IV_Multi_design.png" width="500">
 
 
 ### Implementation
 
-*Figure 4.1 — Clock reduction module Implementation*
+*Figure 4.2 — Partial products Implementation*
 
-<img src="IMG/Part_IV_clk_reduction_logic.png" width="400">
+<img src="IMG/Part_IV_Partial_multipl_logic.png" width="400">
 
-*Figure 4.2 — BCD Counter module Implementation*
+*Figure 4.3 — 1st to 3rd Stage Multiplier Implementation*
 
-<img src="IMG/Part_IV_BCDcounter_logic.png" width="400">
+<img src="IMG/Part_IV_1-3Stage_Add_logic.png" width="500">
 
-*Figure 4.3 — BCD Decoder module Implementation*
+*Figure 4.4 — 4th to 6th Stage Multiplier Implementation*
 
-<img src="IMG/Part_IV_BCDdecoder_logic.png" width="300">
+<img src="IMG/Part_IV_4-6Stage_Add_logic.png" width="600">
 
-*Figure 4.4 — Main module Implementation*
+*Figure 4.5 — 7th Stage Multiplier Implementation*
 
-<img src="IMG/Part_IV_main_logic.png" width="600">
+<img src="IMG/Part_IV_7Stage_Add_logic.png" width="600">
+
+*Figure 4.6 — Main module Implementation*
+
+<img src="IMG/Part_IV_main_logic.png" width="500">
 
 
 ### Demonstration
 
-*Figure 4.5 — BCD Counter Demonstration*
+*Figure 4.7 — 8-bit multiplier Demonstration*
 
 <img src="IMG/Part_IV_Demonstration.gif" width="500">
 
 
 
-<h2 id="Part V">Part V — Display HELLO in ticker-tape fashion</h2>  
+<h2 id="Part V">Part V — 8-bit Multiplication with Adder Tree</h2>  
 
 ### Objective
-Display the word HELLO in ticker-tape fashion on the 7-segment displays, moving the letters from right to left every second.
+Design an optimized 8×8 multiplier using an adder tree structure, improving performance through parallel summation.
 
 
 ### Logic / Design
-The same clock reduction module from the previous part is used to obtain a 1-second signal. Additionally, a generic counter module determines the state of each display.
-Using the resulting count, a HELLO Decoder module determines which letter to display on each 7-segment display. A second decoder module then activates the appropriate segments to form the corresponding letter.
+Instead of adding partial products sequentially, the adder tree performs additions in parallel reduction structure.
+For-loop constructs are used to automatically generate partial products and connect them through the adder tree hierarchy.
+
+*Figure 5.1 — Multiplication circuit concept*
+
+<img src="IMG/Part_V_Multi_design.png" width="500">
 
 
 ### Implementation
 
-*Figure 5.1 — Counter up module Implementation*
+*Figure 5.2 — Adder tree module Implementation*
 
-<img src="IMG/Part_V_counter_logic.png" width="400">
+<img src="IMG/Part_V_tree_Add_logic.png" width="500">
 
-*Figure 5.2 — HELLO Decoder module Implementation*
+*Figure 5.3 — Main module Implementation*
 
-<img src="IMG/Part_V_HELLOdecoder_logic.png" width="600">
-
-*Figure 5.3 — 7-segment display decoder module Implementation*
-
-<img src="IMG/Part_V_7segment_HELLOdecoder_logic.png" width="400">
-
-*Figure 5.4 — Main module Implementation*
-
-<img src="IMG/Part_V_main_logic.png" width="800">
+<img src="IMG/Part_V_main_logic.png" width="600">
 
 
 ### Demonstration
 
-*Figure 5.5 — HELLO movement Demonstration*
+*Figure 5.4 — 8-bit multiplier Demonstration*
 
 <img src="IMG/Part_V_Demonstration.gif" width="500">
