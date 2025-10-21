@@ -1,6 +1,5 @@
 ![FPGA](https://img.shields.io/badge/FPGA-DE10--Lite-blue)
 ![Language](https://img.shields.io/badge/Language-Verilog-green)
-![Simulator](https://img.shields.io/badge/Tool-Logisim-orange)
 # Lab 6 — Chess Clock (FPGA DE10-Lite)
 
 This repository documents the 6th FPGA lab using the DE10-Lite (MAX 10 10M50DAF484C7G).  
