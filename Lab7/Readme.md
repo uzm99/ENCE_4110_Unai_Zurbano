@@ -1,10 +1,11 @@
 ![FPGA](https://img.shields.io/badge/FPGA-DE10--Lite-blue)
 ![Language](https://img.shields.io/badge/Language-Verilog-green)
-![Communication](https://img.shields.io/badge/Real-term)
+![Communication](https://img.shields.io/badge/Communication-RealTerm-blue?logo=serialport)
+
 # Lab 7 — UART Communication (FPGA DE10-Lite)
 
 This repository documents the 7th FPGA lab using the DE10-Lite (MAX 10 10M50DAF484C7G).  
-The purpose of this exercise is to read and display the characters with an UART.
+The purpose of this exercise is to establish communication between the FPGA and a UART interface.
 
 <!-- Table of content -->
 <nav>
@@ -14,45 +15,64 @@ The purpose of this exercise is to read and display the characters with an UART.
     <li><a href="#Design">Design and Logic</a></li>
     <li><a href="#Implementation">Implementation</a></li>
     <li><a href="#Demonstration">Demonstration</a></li>
-    <li><a href="#Future">Future Improvements</a></li>
   </ul>
 </nav>
 
 
 <h2 id="Objective">Objective</h2>
-Design and implement a communication apllication between the FPGA and an UART. Characters will be sent throught the command window on a computer to the UARt and once the word "Hello" is recieved the 7-segments displays will blink the results
+Design and implement a communication system between the FPGA and a UART.
+The system should be able to receive characters from a serial terminal (RealTerm), interpret them as ASCII codes, and display them on the FPGA’s 7-segment displays.
+When the received sequence of characters matches the word “hello”, the system should trigger a timed blinking display of that word, after which the FSM returns to its default waiting state.
 
 
 <h2 id="Design">Design and Logic</h2>
 The system is built using five main states, implemented as a Moore FSM with one-hot encoding for easy debugging via LEDR outputs.
 
-!!!!Explain a bit of UART communication, sending ASCII characters
+UART (Universal Asynchronous Receiver/Transmitter) is a serial communication protocol that transmits data bit by bit using two lines:
+- Tx (Transmit) → sends data from the FPGA to the PC terminal.
+- Rx (Receive) → receives data from the PC terminal to the FPGA.
 
-The design consists of five states:
-- S1: Config -- Where the user can adjust the play time of each player individually. Using the buttons to add or subtract 30s to the timer.
-- S2: Idle -- This state is a waiting state, where the times of each player have already been selected and is whaiting to one of the players press their respective button to start the game.
-- S3: Counter 1 -- With Button 1 pressed, the timer starts decreasing until it reaches zero or the other button is pressed.
-- S4: Counter 2 -- With Button 2 pressed, the timer starts decreasing until it reaches zero or the other button is pressed.
-- S5: End game -- When one of the counters turns zero, the game ends and the opponent player wins.
-The FSM returns to Idle after reset.
+Each character typed in the terminal is transmitted as an ASCII code, which the FPGA receives, decodes, and then displays.
+For this lab, both async_receiver and async_transmitter modules were provided by the instructor to handle serial communication timing, start/stop bits, and data-ready flags automatically.
+
+The design consists of five states corresponding to the progressive detection of the word “HELLO”:
 
 State      | Input condition            | Next state    | Actions / outputs
 -----------|--------------------------- |---------------|--------------------------------
-S_CONFIG   | set_done                   | S_IDLE        | load time1/time2
-S_IDLE     | p1_button (press)          | S_Counter1    | start P1 countdown
-S_IDLE     | p2_button (press)          | S_Counter2    | start P2 countdown
-S_Counter1 | p1_button (press)          | S_Counter2    | stop P1, start P2
-S_Counter1 | timeout_p1 (t1 == 0)       | S_END         | set winner = P2
-S_Counter2 | p2_button (press)          | S_Counter1    | stop P2, start P1
-S_Counter2 | timeout_p2 (t2 == 0)       | S_END         | set winner = P1
-S_END      | reset                      | S_IDLE        | reload initial times
+S_Def      | Char = H                   | S_H           | Display character
+S_H        | Char = E                   | S_HE          | Display character
+S_H        | Char != E                  | S_Def         | 
+S_HE       | Char = L                   | S_HEL         | Display character
+S_HE       | Char = H                   | S_H           | 
+S_HE       | Else Char                  | S_Def         | 
+S_HEL      | Char = L                   | S_HELL        | Display character
+S_HEL      | Char = H                   | S_H           | 
+S_HEL      | Else Char                  | S_Def         | 
+S_HELL     | Char = O                   | S_HELLO       | Display character
+S_HELL     | Char = H                   | S_H           | 
+S_HELL     | Else Char                  | S_Def         | 
+S_HELLO    | Count Done                 | S_Def         | Show Blinking "HELLO"
+S_HELLO    | Char = H                   | S_H           | 
+S_HELLO    | Else Char                  | S_Def         | 
 
 Modules:
-- FSM_ChessTimer -- Controls the system states using Moore FSM. One-hot encoded for easy visualization with the LEDR.
-- Time_selector -- Configures the starting time for each player, adding 30 seconds to the timer with the Button[0] and subtracting 30s with the Button[1]. The SW[1] is used to select wich player is the time being modified.
-- Display_controller -- This module allows to control the sequence displayed on the 7-segments displays on each state. When State is Config, Counter1 or Counter2, the displays will show the time. When Idle state, the word "Go" will be displayed. And when finished the game, "done" + "winner player" will be seen. This module also includes a decoder to convert the total seconds remaining into M.SS format.
 
-And other modules as the debounce, counter_1s and the counter_nbits ae used from previous class excercices or labs.
+- UART receiver/transmitter -- These two modules handle the serial communication between the FPGA and the computer terminal (RealTerm). Every key press in the terminal are sent as an ASCII code through the UART line. The FPGA receives, decodes, and displays this value. All numbers and letters compatible with 7-segment display format are shown.
+- FSM_Word_detector -- It converts uppercase ASCII characters to lowercase, checks the received sequence, and changes states accordingly. The FSM transitions only when a new character is received or when the 3-second counter finishes, forcing a reset to the default state.
+- Counter 3s -- A simple N-bit down counter that starts counting when the FSM enters the S_HELLO state. Once it reaches zero, it asserts a counter_done signal that resets the FSM to S_Def. 
+- Display_controller -- Manages the visual output on the 7-segment displays. In all intermediate states, the display shows the character received via UART. When the FSM reaches S_HELLO, the word “HELLO” is displayed across the five displays and blinks once per second, synchronized with the 1-second tick from counter_1s.
+- Debug Signals -- For debugging, internal control signals such as counter_start, counter_done, and the 3-second timer value are mapped to the LEDs (LEDR) for real-time observation of system behavior.
+
+Additional utility modules, like debounce and counter_1s, were reused from previous labs.
+
+
+Development Challenges: 
+
+One of the main challenges was ensuring the synchronization between the FSM and the 3-second counter.
+Initially, the FSM remained stuck in the S_HELLO state because the counter’s done signal either never cleared or was detected for more than one clock cycle, preventing the FSM from cycling back to its default state.
+This issue was resolved by edge-detecting the counter_done signal and synchronizing it with the main FSM clock.
+Additionally, the FSM logic was modified to differentiate between data_ready and counter_done events, giving reset priority to the timer pulse without interfering with new UART inputs.
+This ensured that once the timer completed and the word finished blinking, the FSM correctly reset to S_Def, ready to detect the word HELLO again.
 
 *Figure 1.1 — State diagram Design*
 
@@ -62,65 +82,43 @@ And other modules as the debounce, counter_1s and the counter_nbits ae used from
 
 <img src="IMG/Part_I_Block_diagram_abstraction_design.png" width="500">
 
+*Figure 1.3 — RealTerm Command Window*
+
+<img src="IMG/Part_I_RealTerm_CommandWindow.png" width="500">
+
 
 <h2 id="Implementation">Implementation</h2>
 
-*Figure 1.3 — FSM module states Implementation*
+*Figure 1.4 — FSM module states Implementation*
 
-<img src="IMG/Part_I_FSM_States_logic.png" width="500">
+<img src="IMG/Part_I_FSM_States_logic.png" width="600">
 
-*Figure 1.4 — FSM module output Implementation*
+*Figure 1.5 — FSM module output Implementation*
 
-<img src="IMG/Part_I_FSM_output_logic.png" width="500">
+<img src="IMG/Part_I_FSM_output_logic.png" width="400">
 
-*Figure 1.5 — Display controller module Implementation*
+*Figure 1.6 — Display controller module Implementation*
 
-<img src="IMG/Part_I_Display_initial_logic.png" width="500">
+<img src="IMG/Part_I_Display_controller_logic.png" width="600">
 
-*Figure 1.6 — Display controller states module Implementation*
+*Figure 1.7 — Counter N-bits module Implementation*
 
-<img src="IMG/Part_I_Display_states_logic.png" width="500">
+<img src="IMG/Part_I_Counter_Nbits_logic.png" width="600">
 
-*Figure 1.7 — Display controller decoder module Implementation*
+*Figure 1.8 — UART and FSM in Main module Implementation*
 
-<img src="IMG/Part_I_Display_decoder_logic.png" width="500">
+<img src="IMG/Part_I_UART_FSM_main_logic.png" width="600">
 
-*Figure 1.8 — Time selection module Implementation*
-
-<img src="IMG/Part_I_time_selection_logic.png" width="600">
-
-*Figure 1.9 — BIN to time module Implementation*
-
-<img src="IMG/Part_I_BIN_to_time_logic.png" width="400">
-
-*Figure 1.10 — Debounce in Main module Implementation*
-
-<img src="IMG/Part_I_Debounce_main_logic.png" width="500">
-
-*Figure 1.11 — FSM in Main module Implementation*
-
-<img src="IMG/Part_I_FSM_main_logic.png" width="500">
-
-*Figure 1.12 — Time selection in Main module Implementation*
-
-<img src="IMG/Part_I_Time_selector_main_logic.png" width="500">
-
-*Figure 1.13 — Counters and display in Main module Implementation*
+*Figure 1.9 — Counter and Display in Main module Implementation*
 
 <img src="IMG/Part_I_Counter_display_main_logic.png" width="500">
 
 
+
 <h2 id="Demonstration">Demonstration</h2>
 
-*Figure 1.14 — FSM Chess Clock Demonstration*
+*Figure 1.10 — FSM Chess Clock Demonstration*
 
 <img src="IMG/Part_I_Demonstration.gif" width="500">
-
-
-<h2 id="Future">Future Improvements</h2>
-
-- Add increment mode (Fischer delay) to simulate tournament conditions.
-
-- Include pause/resume functionality using an extra button.
 
 
