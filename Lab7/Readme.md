@@ -106,15 +106,25 @@ This ensured that once the timer completed and the word finished blinking, the F
 
 <img src="IMG/Part_I_Display_controller_logic.png" width="600">
 
-*Figure 1.7 — Counter N-bits module Implementation*
+*Figure 1.7 — UART Transmitter module Implementation*
+
+<img src="IMG/Part_I_Transmitter_logic.png" width="600">
+
+*Figure 1.8 — UART Receiver module Implementation*
+
+<img src="IMG/Part_I_Receiver1_logic.png" width="600">
+
+<img src="IMG/Part_I_Receiver2_logic.png" width="600">
+
+*Figure 1.9 — Counter N-bits module Implementation*
 
 <img src="IMG/Part_I_Counter_Nbits_logic.png" width="600">
 
-*Figure 1.8 — UART and FSM in Main module Implementation*
+*Figure 1.10 — UART and FSM in Main module Implementation*
 
 <img src="IMG/Part_I_UART_FSM_main_logic.png" width="600">
 
-*Figure 1.9 — Counter and Display in Main module Implementation*
+*Figure 1.11 — Counter and Display in Main module Implementation*
 
 <img src="IMG/Part_I_Counter_display_main_logic.png" width="500">
 
@@ -122,7 +132,7 @@ This ensured that once the timer completed and the word finished blinking, the F
 
 <h2 id="Demonstration">Demonstration</h2>
 
-*Figure 1.10 — FSM Chess Clock Demonstration*
+*Figure 1.12 — Blinking HELLO Demonstration*
 
 <img src="IMG/Part_I_Demonstration.gif" width="500">
 
