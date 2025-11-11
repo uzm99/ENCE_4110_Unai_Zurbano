@@ -1,1 +1,1 @@
-Images and videos
+Videos
