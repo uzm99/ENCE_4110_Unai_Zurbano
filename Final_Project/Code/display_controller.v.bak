@@ -1,0 +1,108 @@
+
+`default_nettype none
+
+module display_controller(
+	input tick,
+	input [7:0] char2seg,
+	input [4:0] state_displays,
+	input data_ready,
+	output reg [7:0] HEX0,
+	output reg [7:0] HEX1,
+	output reg [7:0] HEX2,
+	output reg [7:0] HEX3,
+	output reg [7:0] HEX4,
+	output reg [7:0] HEX5
+);
+
+	wire [7:0] w_HEX0, w_HEX1, w_HEX2, w_HEX3, w_HEX4, w_HEX5;
+	
+	//States
+	localparam [4:0] S_def = 5'b00000, S_H= 5'b00001, S_HE = 5'b00010, S_HEL= 5'b00100, S_HELL = 5'b01000, S_HELLO = 5'b10000;
+	
+	
+	// Char Converter and Seg7 Decoder MODULES
+	// **************************************************
+	
+	always @(*) begin
+	
+		HEX0 = 8'hFF;
+		HEX1 = 8'hFF;
+		HEX2 = 8'hFF;
+		HEX3 = 8'hFF;
+		HEX4 = 8'hFF;
+		HEX5 = 8'hFF;
+		
+		case(state_displays)
+		
+			S_def: begin
+				HEX0 = char2seg;
+				HEX1 = 8'hFF;
+				HEX2 = 8'hFF;
+				HEX3 = 8'hFF;
+				HEX4 = 8'hFF;
+				HEX5 = 8'hFF;
+				
+			end
+			
+			S_H: begin
+				HEX0 = char2seg;
+				HEX1 = 8'hFF;
+				HEX2 = 8'hFF;
+				HEX3 = 8'hFF;
+				HEX4 = 8'hFF;
+				HEX5 = 8'hFF;
+			end
+			
+			S_HE: begin
+				HEX0 = char2seg;
+				HEX1 = 8'hFF;
+				HEX2 = 8'hFF;
+				HEX3 = 8'hFF;
+				HEX4 = 8'hFF;
+				HEX5 = 8'hFF;
+			end
+			
+			S_HEL: begin
+				HEX0 = char2seg;
+				HEX1 = 8'hFF;
+				HEX2 = 8'hFF;
+				HEX3 = 8'hFF;
+				HEX4 = 8'hFF;
+				HEX5 = 8'hFF;
+			end
+			
+			S_HELL: begin
+				HEX0 = char2seg;
+				HEX1 = 8'hFF;
+				HEX2 = 8'hFF;
+				HEX3 = 8'hFF;
+				HEX4 = 8'hFF;
+				HEX5 = 8'hFF;
+			end
+		
+			S_HELLO: begin
+				if(tick) begin
+					HEX0 = 8'b10100011; //o
+					HEX1 = 8'b11000111; //L
+					HEX2 = 8'b11000111; //L
+					HEX3 = 8'b10000110; //E
+					HEX4 = 8'b10001001; //H
+					HEX5 = 8'hFF;
+				end else begin
+					HEX0 = 8'hFF;
+					HEX1 = 8'hFF;
+					HEX2 = 8'hFF;
+					HEX3 = 8'hFF;
+					HEX4 = 8'hFF;
+					HEX5 = 8'hFF;
+				end
+				
+			end	
+			
+		endcase
+	
+	end
+
+endmodule
+
+`default_nettype wire
