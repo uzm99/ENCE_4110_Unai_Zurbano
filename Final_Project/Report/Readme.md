@@ -61,17 +61,19 @@ For this project, when gas is detected, the system immediately transitions to th
 This section explains the key modules and internal logic used in the project. The full code is available in the Code/ folder.
 
 - Ultrasonic Detector:
+  
 As explained on the design, a signal needs to be triggerd for 10 us in a cycle of 60ms. For the signal detection, a simple FSM is implemented to effitiently measure the raising and falling edges and determine the precise distance of the object.
 
 *Figure 1.3 — Trigger signal Ultrasonic module*
 
-<img src="IMG/Trigger_signal_sonic_detector.png" width="500">
+<img src="IMG/Trigger_signal_sonic_detector.png" width="300">
 
 *Figure 1.4 — Echo signal Ultrasonic module*
 
 <img src="IMG/Echo_signal_sonic_detector.png" width="500">
 
 - PWM for light dimming:
+  
 Using the frequency of the signal, the human eye can interprete the brightness of the light. It creates a pulsing signal depending on the proximity with a distance-to-duty mapping. Then the one bit signal is concatenated for the ten bits of the LEDR.
 
 *Figure 1.5 — PWM light module*
@@ -80,7 +82,7 @@ Using the frequency of the signal, the human eye can interprete the brightness o
 
 *Figure 1.6 — PWM light RTL Viewer*
 
-<img src="IMG/PWM_RTLViewer.png" width="500">
+<img src="IMG/PWM_RTLViewer.png" width="800">
 
 - Main FSM
 The FSM manages transitions between all security and automation states.
@@ -102,14 +104,16 @@ S_Password | Correct password           | S_IDLE        | Display temperature
 <img src="IMG/States_diagram_main.png" width="800">
 
 - Display controller
+
 The display controller modules is an always statement that determine with priorities the message to show. The order would be determine of the safety requiremetns:
+
 Fire → Locking → Password → Intruder → Wrong PW → Locked → Temperature (C and F)
 
 Timings, debouncing and UART modules from previous labs were reused.
 
 *Figure 1.8 — Main block diagram RTL Viewer*
 
-<img src="IMG/Block_diagram_main.png" width="800">
+<img src="IMG/Block_diagram_main.png" width="1000">
 
 
 <h2 id="Demonstration">Demonstration</h2>
@@ -137,10 +141,15 @@ Timings, debouncing and UART modules from previous labs were reused.
 
 <h2 id="Conclusions">Conclusions</h2>
 This project was an opportunity to integrate multiple digital sensors and modules into a larger, real-time system. Although not all initial objectives were completed due to time constraints (LCD and DS18B20), the final implementation demonstrates:
+
 - A fully operational security and automation FSM
+ 
 - Reliable UART communication
+
 - PWM control for dimming
+ 
 - Ultrasonic presence detection
+  
 - Smoke detection with emergency handling
 
 This project helped consolidate concepts like modular Verilog design, synchronous logic, clock domain management and FSM construction. More time would have allowed code cleanup, more comments, and full integration of the temperature and LCD modules.
@@ -148,9 +157,14 @@ This project helped consolidate concepts like modular Verilog design, synchronou
 
 <h2 id="Future">Future improvements</h2>
 Possible improvements include:
+
 - Full integration of the DS18B20 temperature sensor and LCD display
+  
 - Adding an ADC module to read the MQ-2 analog signal for finer smoke-level measurement
+  
 - Integrating Bluetooth or Wi-Fi modules for remote monitoring
+  
 - Designing a 3D-printed enclosure to better package the system and simulate a real home-security device
+  
 - Adding more sensors (PIR, light sensor, humidity sensor)
 
